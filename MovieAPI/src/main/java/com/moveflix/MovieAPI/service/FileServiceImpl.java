@@ -2,6 +2,7 @@ package com.moveflix.MovieAPI.service;
 
 
 
+import com.moveflix.MovieAPI.exceptions.FileExistsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class FileServiceImpl implements FileService{
     private final Logger logger = LoggerFactory.getLogger(FileServiceImpl.class);
 
     @Override
-    public String uploadFile(String path, MultipartFile file) throws IOException {
+    public String uploadFile(String path, MultipartFile file) throws FileExistsException, IOException {
         //get name of the file
         String fileName = file.getOriginalFilename();
         logger.info("in service layer");
