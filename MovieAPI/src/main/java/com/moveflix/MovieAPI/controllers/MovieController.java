@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moveflix.MovieAPI.dto.MovieDto;
 import com.moveflix.MovieAPI.exceptions.EmptyFileException;
 import com.moveflix.MovieAPI.service.MovieService;
+import com.moveflix.MovieAPI.utils.AppConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -72,6 +73,24 @@ public class MovieController {
     @DeleteMapping("/delete/{movieId}")
     public ResponseEntity<String> deleteMovieHandler(@PathVariable Integer movieId) throws IOException {
         return new ResponseEntity<>(movieService.deleteMovie(movieId), HttpStatus.OK);
+    }
+
+    @GetMapping("/allMoviesPage")
+    public ResponseEntity<?> getAllMoviesWithPaginationHandler(
+            @RequestParam(defaultValue = AppConstants.PAGE_NUMBER,required = false) Integer pageNumber,
+            @RequestParam(defaultValue = AppConstants.PAGE_SIZE,required = false) Integer pageSize) {
+
+        return new ResponseEntity<>(movieService.getAllMoviesWithPagination(pageNumber, pageSize), HttpStatus.OK);
+    }
+
+    @GetMapping("/allMoviesPageSort")
+    public ResponseEntity<?> getAllMoviesWithPaginationAndSortingHandler(
+            @RequestParam(defaultValue = AppConstants.PAGE_NUMBER,required = false) Integer pageNumber,
+            @RequestParam(defaultValue = AppConstants.PAGE_SIZE,required = false) Integer pageSize,
+            @RequestParam(defaultValue = AppConstants.SORT_BY,required = false) String sortBy,
+            @RequestParam(defaultValue = AppConstants.SORT_DIR,required = false) String dir) {
+
+        return new ResponseEntity<>(movieService.getAllMoviesWithPaginationAndSorting(pageNumber, pageSize,sortBy,dir), HttpStatus.OK);
     }
 
 

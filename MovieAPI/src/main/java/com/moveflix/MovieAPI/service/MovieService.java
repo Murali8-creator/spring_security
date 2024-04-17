@@ -1,6 +1,7 @@
 package com.moveflix.MovieAPI.service;
 
 import com.moveflix.MovieAPI.dto.MovieDto;
+import com.moveflix.MovieAPI.dto.MoviePageResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -15,6 +16,10 @@ public interface MovieService {
     MovieDto getMovieById(int movieId);
 
     List<MovieDto> getAllMovies();
+
+    MoviePageResponse getAllMoviesWithPagination(Integer pageNumber, Integer pageSize);
+
+    MoviePageResponse getAllMoviesWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String sortBy, String dir);
 
     MovieDto updateMovie(Integer movieId, MovieDto movieDto, MultipartFile multipartFile) throws IOException;
 
