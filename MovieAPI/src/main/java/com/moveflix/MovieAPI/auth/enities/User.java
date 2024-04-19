@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +19,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Builder
 public class User implements UserDetails {
 
 
@@ -48,15 +50,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    private boolean isEnabled = true;
-
-    private boolean isAccountNonExpired = true;
-
-    private boolean isAccountNonLocked = true;
-
-    private boolean isCredentialsNonExpired = true;
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -75,21 +68,21 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
